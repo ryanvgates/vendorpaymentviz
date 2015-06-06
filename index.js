@@ -1,4 +1,5 @@
-var sampleData = 	
+var sampleData = {};
+/*	
 	{ sumVendTop: 
 		[
 			{ "_id" : "AGENCY FOR HEALTH CARE ADMIN", "total" : 20923882780.100025 },
@@ -30,6 +31,7 @@ var sampleData =
 			{ "_id" : "SEMINOLE COUNTY SCHOOL BOARD", "total" : 316862210.3299996 }
 		]
 	};
+	*/
 
 $(function() {
 	InitChart();
@@ -50,5 +52,5 @@ function InitChart() {
 	   .size([diameter, diameter])
 	   .padding(3);   // padding between adjacent circles
 	   // new data will be loaded to bubble layout
-	   .value(function(d) {return d.size;})
+	   .value(function(d) {return d.size;});
 }
