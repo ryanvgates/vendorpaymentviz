@@ -47,7 +47,9 @@ function InitChart() {
 	   .size([diameter, diameter])
 	   .padding(3)   // padding between adjacent circles
 	   // new data will be loaded to bubble layout
-	   .value(function(d) {return d.size;});
+	   .value(function(d) {
+	   	return d.size;
+	   });
 
 	var nodes = bubble.nodes(processData(sampleData))
 	   // filter out the outer bubble
@@ -74,7 +76,13 @@ function InitChart() {
     var newDataSet = [];
 
     for(var prop in obj) {
-      newDataSet.push({name: prop, className: prop.toLowerCase(), size: obj[prop]});
+    	for(var item in obj[prop]) {
+	    	console.log(item);
+    		console.log(item);
+      		newDataSet.push({name: item, className: item.toLowerCase(), size: obj[prop][item]});
+    	}
+
     }
+
     return {children: newDataSet};
   }
