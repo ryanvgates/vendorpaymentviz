@@ -62,15 +62,9 @@ function InitChart() {
 			.attr('transform', function(d) { 
 				return 'translate(' + d.x + ',' + d.y + ')'; 
 			})
-			.attr('r', function(d) { 
-				return d.r; 
-			})
-			.attr('class', function(d) { 
-				return d.className; 
-			})				
-		   .style("fill",function() {
-	    		return "hsl(" + Math.random() * 360 + ",100%,50%)";
-	    	});
+			.attr('r', function(d) { return d.r; })
+			.attr('class', function(d) { return d.className; })				
+		   .style("fill",function() { return "hsl(" + Math.random() * 360 + ",100%,50%)"; });
 }
 
   function processData(data) {
