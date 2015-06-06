@@ -56,17 +56,18 @@ function InitChart() {
       var vis = svg.selectAll('circle')
 					.data(nodes);
   
-  	vis.enter().append('g').append('circle')
-		.attr('transform', function(d) { 
-			return 'translate(' + d.x + ',' + d.y + ')'; 
-		})
+  	vis.enter().append('g')
+		.attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y + ')'; })
+		.append('circle')
 		.attr('r', function(d) { return d.r; })
 		.attr('class', function(d) { return d.className; })			
 	   	.style('fill',function() { return "hsl(" + Math.random() * 360 + ",100%,50%)"; })
-	   	.style('stroke', 'black')
-	   	.append("text")
+	   	.style('stroke', 'black');
+
+   	d3.selectAll('g')
+	   	.append('text')
 	    .attr("dx", function(d){return -20})
-	    .attr('stroke', 'white')
+	    .attr('stroke', 'black')
 	    .text(function(d){return d.name});
 }
 
