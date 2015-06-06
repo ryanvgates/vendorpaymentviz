@@ -1,5 +1,4 @@
-var sampleData = {};
-/*	
+var sampleData = 
 	{ sumVendTop: 
 		[
 			{ "_id" : "AGENCY FOR HEALTH CARE ADMIN", "total" : 20923882780.100025 },
@@ -31,7 +30,7 @@ var sampleData = {};
 			{ "_id" : "SEMINOLE COUNTY SCHOOL BOARD", "total" : 316862210.3299996 }
 		]
 	};
-	*/
+
 
 $(function() {
 	InitChart();
@@ -44,13 +43,38 @@ function InitChart() {
 	   .attr('width', diameter)
 	   .attr('height', diameter);
 
-	var nodes = bubble.nodes(sampleData))
+	var bubble = d3.layout.pack()
+	   .size([diameter, diameter])
+	   .padding(3)   // padding between adjacent circles
+	   // new data will be loaded to bubble layout
+	   .value(function(d) {return d.size;});
+
+	var nodes = bubble.nodes(processData(sampleData))
 	   // filter out the outer bubble
 	   .filter(function(d) { return !d.children; });
 
-	var bubble = d3.layout.pack()
-	   .size([diameter, diameter])
-	   .padding(3);   // padding between adjacent circles
-	   // new data will be loaded to bubble layout
-	   .value(function(d) {return d.size;});
+      var vis = svg.selectAll('circle')
+					.data(nodes);
+  
+  vis.enter().append('circle')
+			.attr('transform', function(d) { 
+				return 'translate(' + d.x + ',' + d.y + ')'; 
+			})
+			.attr('r', function(d) { 
+				return d.r; 
+			})
+			.attr('class', function(d) { 
+				return d.className; 
+			});
 }
+
+  function processData(data) {
+    var obj = data.sumVendTop;
+
+    var newDataSet = [];
+
+    for(var prop in obj) {
+      newDataSet.push({name: prop, className: prop.toLowerCase(), size: obj[prop]});
+    }
+    return {children: newDataSet};
+  }
