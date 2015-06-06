@@ -47,9 +47,7 @@ function InitChart() {
 	   .size([diameter, diameter])
 	   .padding(3)   // padding between adjacent circles
 	   // new data will be loaded to bubble layout
-	   .value(function(d) {
-	   	return d.size;
-	   });
+	   .value(function(d) { return d.size; });
 
 	var nodes = bubble.nodes(processData(sampleData))
 	   // filter out the outer bubble
@@ -58,13 +56,18 @@ function InitChart() {
       var vis = svg.selectAll('circle')
 					.data(nodes);
   
-  vis.enter().append('circle')
-			.attr('transform', function(d) { 
-				return 'translate(' + d.x + ',' + d.y + ')'; 
-			})
-			.attr('r', function(d) { return d.r; })
-			.attr('class', function(d) { return d.className; })				
-		   .style("fill",function() { return "hsl(" + Math.random() * 360 + ",100%,50%)"; });
+  	vis.enter().append('g').append('circle')
+		.attr('transform', function(d) { 
+			return 'translate(' + d.x + ',' + d.y + ')'; 
+		})
+		.attr('r', function(d) { return d.r; })
+		.attr('class', function(d) { return d.className; })			
+	   	.style('fill',function() { return "hsl(" + Math.random() * 360 + ",100%,50%)"; })
+	   	.style('stroke', 'black')
+	   	.append("text")
+	    .attr("dx", function(d){return -20})
+	    .attr('stroke', 'white')
+	    .text(function(d){return d.name});
 }
 
   function processData(data) {
