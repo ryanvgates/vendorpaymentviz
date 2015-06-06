@@ -38,7 +38,7 @@ $(function() {
 
 function InitChart() {
 	var diameter = 600;
-
+	var color = d3.scale.category20();
 	var svg = d3.select('#svgVisualize')
 	   .attr('width', diameter)
 	   .attr('height', diameter);
@@ -67,7 +67,10 @@ function InitChart() {
 			})
 			.attr('class', function(d) { 
 				return d.className; 
-			});
+			})				
+		   .style("fill",function() {
+	    		return "hsl(" + Math.random() * 360 + ",100%,50%)";
+	    	});
 }
 
   function processData(data) {
@@ -77,11 +80,8 @@ function InitChart() {
 
     for(var prop in obj) {
     	for(var item in obj[prop]) {
-	    	console.log(item);
-    		console.log(item);
       		newDataSet.push({name: item, className: item.toLowerCase(), size: obj[prop][item]});
     	}
-
     }
 
     return {children: newDataSet};
