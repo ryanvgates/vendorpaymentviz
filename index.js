@@ -68,7 +68,7 @@ function InitChart() {
 	   	.append('text')
 	    .attr("dx", function(d){return -20})
 	    .attr('stroke', 'black')
-	    .text(function(d){return d.name});
+	    .text(function(d){return d.name + " - " + d.size});
 }
 
   function processData(data) {
